@@ -27,11 +27,11 @@
         <parameter name ="chromeDriverPort" value = "11001"/>
         <parameter name ="udid" value = "emulator-5554"/>
             <classes>
-<!--                <class name = "com.qa.tests.LoginTests"/>-->
+                <class name = "com.qa.tests.LoginTests"/>
 <!--                    <methods>-->
 <!--                        <include name ="invalidPassword" />-->
 <!--                    </methods>-->
-                <class name = "com.qa.tests.ProductTests"/>
+<!--                <class name = "com.qa.tests.ProductTests"/>-->
 
             </classes>
     </test>

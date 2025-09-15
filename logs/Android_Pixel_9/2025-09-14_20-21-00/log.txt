@@ -1,0 +1,18 @@
+32:AndroidPixel_9:com.qa.tests.ProductTests:
+***** starting test:validateProductOnProductsDetailPage*****
+
+32:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+32:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+32:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+32:AndroidPixel_9:com.qa.pages.ProductsPage:press SB title link -
+32:AndroidPixel_9:com.qa.pages.ProductDetailsPage:title is - Sauce Labs Backpack
+32:AndroidPixel_9:com.qa.pages.ProductDetailsPage:txt is - carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.
+32:AndroidPixel_9:com.qa.pages.ProductDetailsPage:navigate back to products page
+32:AndroidPixel_9:com.qa.tests.ProductTests:
+***** starting test:validateProductOnProductsPage*****
+
+32:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+32:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+32:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+32:AndroidPixel_9:com.qa.pages.ProductsPage:title is - Sauce Labs Backpack
+32:AndroidPixel_9:com.qa.pages.ProductsPage:price is - $29.99

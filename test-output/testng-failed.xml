@@ -13,20 +13,21 @@
     <parameter name="deviceName" value="Pixel_9"/>
     <parameter name="systemPort" value="10001"/>
     <classes>
-      <class name="com.qa.tests.ProductTests">
+      <class name="com.qa.tests.LoginTests">
         <methods>
+          <include name="beforeMethod"/>
           <include name="afterTest"/>
+          <include name="beforeSuite"/>
           <include name="beforeClass"/>
-          <include name="validateProductOnProductsPage"/>
-          <include name="beforeTest"/>
           <include name="afterMethod"/>
-          <include name="validateProductOnProductsDetailPage"/>
+          <include name="beforeTest"/>
           <include name="beforeMethod"/>
-          <include name="beforeMethod"/>
+          <include name="invalidUserNameTest"/>
+          <include name="afterSuite"/>
           <include name="afterMethod"/>
           <include name="afterClass"/>
         </methods>
-      </class> <!-- com.qa.tests.ProductTests -->
+      </class> <!-- com.qa.tests.LoginTests -->
     </classes>
   </test> <!-- Pixel_9(failed) -->
 </suite> <!-- Failed suite [Suite] -->

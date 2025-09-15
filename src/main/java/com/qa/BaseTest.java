@@ -34,7 +34,7 @@ public class BaseTest {
     protected static ThreadLocal <String> platform = new ThreadLocal<String>();
     protected static ThreadLocal <String> dateTime = new ThreadLocal<String>();
     protected static ThreadLocal <String> deviceName = new ThreadLocal<String>();
-//    private static AppiumDriverLocalService server;
+    private static AppiumDriverLocalService server;
 //    static Logger log = LogManager.getLogger(BaseTest.class.getName());
 
 
@@ -121,17 +121,17 @@ public class BaseTest {
 
     }
 
-//    @BeforeSuite
-//    public void beforeSuite() {
-//        server = getAppiumServerDefault();
-//        server.start();
-//    }
-//
-//    @AfterSuite
-//    public void afterSuite() {
-//        server.stop();
-//        System.out.println("Appium server stopped");
-//    }
+    @BeforeSuite
+    public void beforeSuite() {
+        server = getAppiumServerDefault();
+        server.start();
+    }
+
+    @AfterSuite
+    public void afterSuite() {
+        server.stop();
+        System.out.println("Appium server stopped");
+    }
 
     public AppiumDriverLocalService getAppiumServerDefault(){
         return AppiumDriverLocalService.buildDefaultService();
