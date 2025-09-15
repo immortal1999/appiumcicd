@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-09-14T15:36:52 PDT" name="Suite" finished-at="2025-09-14T15:37:21 PDT" duration-ms="28359">
+    <groups>
+    </groups>
+    <test started-at="2025-09-14T15:36:52 PDT" name="Pixel_9" finished-at="2025-09-14T15:37:21 PDT" duration-ms="28359">
+      <class name="com.qa.tests.ProductTests">
+        <test-method is-config="true" signature="beforeTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:36:52 PDT" name="beforeTest" finished-at="2025-09-14T15:36:56 PDT" duration-ms="3753" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Android]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[9.0]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Pixel_9]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[emulator-5554]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[10001]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[11001]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:36:56 PDT" name="beforeClass" finished-at="2025-09-14T15:36:57 PDT" duration-ms="530" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:36:57 PDT" name="beforeMethod" finished-at="2025-09-14T15:36:57 PDT" duration-ms="617" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:36:57 PDT" name="beforeMethod" finished-at="2025-09-14T15:37:02 PDT" duration-ms="4964" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.qa.tests.ProductTests.validateProductOnProductsDetailPage() throws java.lang.InterruptedException,java.sql.SQLException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="validateProductOnProductsDetailPage()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:02 PDT" name="validateProductOnProductsDetailPage" finished-at="2025-09-14T15:37:11 PDT" duration-ms="8457" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateProductOnProductsDetailPage -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:11 PDT" name="afterMethod" finished-at="2025-09-14T15:37:11 PDT" duration-ms="866" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:11 PDT" name="afterMethod" finished-at="2025-09-14T15:37:14 PDT" duration-ms="2366" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=validateProductOnProductsDetailPage status=SUCCESS method=ProductTests.validateProductOnProductsDetailPage()[pri:0, instance:com.qa.tests.ProductTests@10683d9d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:14 PDT" name="beforeMethod" finished-at="2025-09-14T15:37:14 PDT" duration-ms="532" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:14 PDT" name="beforeMethod" finished-at="2025-09-14T15:37:16 PDT" duration-ms="2052" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.qa.tests.ProductTests.validateProductOnProductsPage() throws java.lang.InterruptedException,java.sql.SQLException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="validateProductOnProductsPage()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:16 PDT" name="validateProductOnProductsPage" finished-at="2025-09-14T15:37:18 PDT" duration-ms="1653" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateProductOnProductsPage -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:18 PDT" name="afterMethod" finished-at="2025-09-14T15:37:19 PDT" duration-ms="629" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:19 PDT" name="afterMethod" finished-at="2025-09-14T15:37:20 PDT" duration-ms="1205" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=validateProductOnProductsPage status=SUCCESS method=ProductTests.validateProductOnProductsPage()[pri:0, instance:com.qa.tests.ProductTests@10683d9d] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:20 PDT" name="afterClass" finished-at="2025-09-14T15:37:20 PDT" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:com.qa.tests.ProductTests@10683d9d]" started-at="2025-09-14T15:37:20 PDT" name="afterTest" finished-at="2025-09-14T15:37:21 PDT" duration-ms="699" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- com.qa.tests.ProductTests -->
+    </test> <!-- Pixel_9 -->
+  </suite> <!-- Suite -->
+</testng-results>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/apache-log4j-3.0.0-beta3-src/src/site/antora/modules/ROOT/examples/manual/appenders/database/jdbc.sql" dialect="GenericSQL" />
+  </component>
+</project>

@@ -1,0 +1,78 @@
+32:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+32:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:invalidPassword*****
+
+32:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+32:AndroidPixel_9:com.qa.pages.LoginPage:password is  invalidpassword
+32:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+32:AndroidPixel_9:com.qa.pages.LoginPage:error text is - Username and password do not match any user in this service.
+32:AndroidPixel_9:com.qa.tests.LoginTests:actual error txt - Username and password do not match any user in this service.
+expected error txt - Username and password do not match any user in this service.
+32:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method
+32:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+32:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:invalidUserNameTest*****
+
+32:AndroidPixel_9:com.qa.pages.LoginPage:login with invalidusername
+32:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+32:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+32:AndroidPixel_9:com.qa.pages.LoginPage:error text is - Username and password do not match any user in this service.
+32:AndroidPixel_9:com.qa.tests.LoginTests:actual error txt - Username and password do not match any user in this service.
+expected error txt - Username and password do not match any user in this service.
+32:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method
+32:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+32:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:successfulLogin*****
+
+32:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+32:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+32:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+32:AndroidPixel_9:com.qa.pages.ProductsPage:product page title is - PRODUCTS
+32:AndroidPixel_9:com.qa.tests.LoginTests:actual title - PRODUCTS
+expected title - PRODUCTS
+32:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method
+32:AndroidPixel_9:com.qa.tests.ProductTests:
+***** starting test:validateProductOnProductsDetailPage*****
+
+32:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+32:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+32:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+32:AndroidPixel_9:com.qa.listeners.TestListener:java.sql.SQLException: No suitable driver
+	at java.sql/java.sql.DriverManager.getDriver(DriverManager.java:269)
+	at ui.DeepLink.OpenAppWith(DeepLink.java:19)
+	at com.qa.tests.ProductTests.validateProductOnProductsDetailPage(ProductTests.java:91)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:328)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at --- Async.Stack.Trace --- (captured by IntelliJ IDEA debugger)
+	at java.base/java.util.concurrent.FutureTask.<init>(FutureTask.java:134)
+	at java.base/java.util.concurrent.AbstractExecutorService.newTaskFor(AbstractExecutorService.java:113)
+	at java.base/java.util.concurrent.AbstractExecutorService.invokeAll(AbstractExecutorService.java:305)
+	at org.testng.internal.thread.ThreadUtil.execute(ThreadUtil.java:70)
+	at org.testng.SuiteRunner.runInParallelTestMode(SuiteRunner.java:442)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:371)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+	at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+

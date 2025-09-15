@@ -1,0 +1,77 @@
+////
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+////
+[id=log4j.jul.levelConverter]
+== `log4j.jul.levelConverter`
+
+[cols="1h,5"]
+|===
+| Env. variable | `LOG4J_JUL_LEVEL_CONVERTER`
+| Type          | `Class<? extends LevelConverter>`
+| Default value | `org.apache.logging.jul.tolog4j.internal.DefaultLevelConverter`
+|===
+
+Fully qualified name of an alternative `org.apache.logging.jul.tolog4j.spi.LevelConverter` implementation.
+
+.Default level conversions
+[%collapsible]
+====
+[cols="1m,1",id=default-level-conversions]
+|===
+| Java Level | Log4j Level
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#OFF[OFF]
+| `OFF`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#SEVERE[SEVERE]
+| `ERROR`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#WARNING[WARNING]
+| `WARN`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#INFO[INFO]
+| `INFO`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#CONFIG[CONFIG]
+| custom `CONFIG` level with a numeric value of `450`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#FINE[FINE]
+| `DEBUG`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#FINER[FINER]
+| `TRACE`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#FINEST[FINEST]
+| custom `FINEST` level with a numeric value of `700`
+
+| https://docs.oracle.com/en/java/javase/{java-target-version}/docs/api/java.logging/java/util/logging/Level.html#ALL[ALL]
+| `ALL`
+|===
+====
+
+[id=log4j.jul.loggerAdapter]
+== `log4j.jul.loggerAdapter`
+
+[cols="1h,5"]
+|===
+| Env. variable | `LOG4J_JUL_LOGGER_ADAPTER`
+| Type          | `Class<? extends AbstractLoggerAdapter>`
+| Default value | `org.apache.logging.jul.tolog4j.internal.ApiLoggerAdapter`
+|===
+
+Fully qualified class name of a custom `org.apache.logging.jul.tolog4j.spi.AbstractLoggerAdapter` implementation to use, which provides an implementation of the `j.u.l.Logger` mutator methods (e.g., `Logger.setLevel()`).
+
+By default `org.apache.logging.jul.tolog4j.internal.ApiLoggerAdapter` is used and the mutator methods are disabled.

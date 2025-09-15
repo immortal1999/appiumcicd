@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to you under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-bom</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <!-- Using `log4j` instead of `log4j-parent` for backward compatibility: -->
+  <artifactId>log4j</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Apache Log4j Parent</name>
+  <description>Apache Log4j Parent</description>
+
+  <properties>
+
+    <!-- ===========================
+         Release-specific properties
+         =========================== -->
+    <log4jParentDir>${basedir}</log4jParentDir>
+    <log4jReleaseVersion>3.0.0-alpha1</log4jReleaseVersion>
+    <log4jReleaseManager>Ralph Goers</log4jReleaseManager>
+    <log4jReleaseKey>B3D8E1BA</log4jReleaseKey>
+    <log4jSigningUserName>rgoers@apache.org</log4jSigningUserName>
+
+    <!-- =================
+         Common properties
+         ================= -->
+    <!-- TODO: fix errors and reenable SpotBugs -->
+    <spotbugs.skip>true</spotbugs.skip>
+    <!-- TODO: move to `logging-parent` -->
+    <bnd.baseline.fail.on.missing>false</bnd.baseline.fail.on.missing>
+    <!-- TODO: enable when everything is in sync -->
+    <bnd.baseline.skip>true</bnd.baseline.skip>
+
+    <!-- ========================
+         Site-specific properties
+         ======================== -->
+    <!-- `maven-javadoc-plugin` is only used to generate Javadoc HTML used in the website.
+         We don't deploy any Javadoc JARs.
+         We also don't generate Javadoc HTML for all modules, but only for two modules: `log4j-api` and `log4j-core`. -->
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <!-- Skipping `maven-site-plugin` globally.
+         It is manually enabled only for the parent module below. -->
+    <maven.site.skip>true</maven.site.skip>
+    <maven.site.deploy.skip>true</maven.site.deploy.skip>
+
+    <!-- ██     ██  █████  ██████  ███    ██ ██ ███    ██  ██████  ██
+         ██     ██ ██   ██ ██   ██ ████   ██ ██ ████   ██ ██       ██
+         ██  █  ██ ███████ ██████  ██ ██  ██ ██ ██ ██  ██ ██   ███ ██
+         ██ ███ ██ ██   ██ ██   ██ ██  ██ ██ ██ ██  ██ ██ ██    ██
+          ███ ███  ██   ██ ██   ██ ██   ████ ██ ██   ████  ██████  ██
+
+         Dependency and plugin version properties might have many implications beyond their simple appearance!
+         Walk through the following checklist before making a change in these properties!
+
+         1. Follow the `<artifactId>.version` naming convention
+         2. Make sure properties are sorted in alphabetical order
+         3. Check parent POMs for any associations.
+            For instance, Maven Surefire Plugin version property is such an exception.
+            It is named as `surefire.version` rather than `maven-surefire-plugin.version`, since `surefire.version` is already employed by `apache.org:apache` parent POM.
+         4. Think of consequences when users _import_ this POM along with, e.g., `spring-boot-dependencies` BOM -->
+
+    <!-- =================================================
+         Plugin version properties (in alphabetical order)
+         ================================================= -->
+    <asciidoctor-maven-plugin.version>2.2.4</asciidoctor-maven-plugin.version>
+    <docker-maven-plugin.version>0.45.1</docker-maven-plugin.version>
+    <exam-maven-plugin.version>4.13.5</exam-maven-plugin.version>
+    <!-- `surefire.version` property used in `apache.org:apache`: -->
+    <surefire.version>3.5.2</surefire.version>
+
+    <!-- =====================================================
+         Direct dependency version properties (in alphabetical order)
+         ===================================================== -->
+    <assertj.version>3.26.3</assertj.version>
+    <awaitility.version>4.2.2</awaitility.version>
+    <bsh.version>2.0b6</bsh.version>
+    <commons-codec.version>1.17.1</commons-codec.version>
+    <commons-csv.version>1.12.0</commons-csv.version>
+    <commons-dbcp2.version>2.12.0</commons-dbcp2.version>
+    <commons-io.version>2.17.0</commons-io.version>
+    <commons-lang3.version>3.17.0</commons-lang3.version>
+    <disruptor.version>4.0.0</disruptor.version>
+    <embedded-ldap.version>0.9.0</embedded-ldap.version>
+    <felix.version>7.0.5</felix.version>
+    <groovy.version>4.0.23</groovy.version>
+    <guava.version>33.3.1-jre</guava.version>
+    <h2.version>2.3.232</h2.version>
+    <hamcrest.version>3.0</hamcrest.version>
+    <HdrHistogram.version>2.2.2</HdrHistogram.version>
+    <hsqldb.version>2.7.4</hsqldb.version>
+    <jackson-bom.version>2.18.1</jackson-bom.version>
+    <javax-jms.version>2.0.1</javax-jms.version>
+    <java-allocation-instrumenter.version>3.3.4</java-allocation-instrumenter.version>
+    <jctools.version>4.0.5</jctools.version>
+    <jmdns.version>3.5.12</jmdns.version>
+    <jmh.version>1.37</jmh.version>
+    <json-unit.version>3.5.0</json-unit.version>
+    <jspecify.version>1.0.0</jspecify.version>
+    <junit.version>4.13.2</junit.version>
+    <junit-jupiter.version>5.11.3</junit-jupiter.version>
+    <junit-pioneer.version>2.3.0</junit-pioneer.version>
+    <log4j2-custom-layout.version>1.1.0</log4j2-custom-layout.version>
+    <log4j2-logstash-layout.version>0.18</log4j2-logstash-layout.version>
+    <maven.version>3.9.9</maven.version>
+    <mockito.version>5.14.2</mockito.version>
+    <nashorn.version>15.4</nashorn.version>
+    <opentest4j.version>1.3.0</opentest4j.version>
+    <org.eclipse.osgi.version>3.21.0</org.eclipse.osgi.version>
+    <oro.version>2.0.8</oro.version>
+    <!-- The OSGi API version MUST always be the MINIMUM version Log4j supports -->
+    <osgi.framework.version>1.10.0</osgi.framework.version>
+    <osgi.resource.version>1.0.1</osgi.resource.version>
+    <pax-exam.version>4.13.5</pax-exam.version>
+    <plexus-utils.version>3.5.1</plexus-utils.version>
+    <system-stubs.version>2.1.7</system-stubs.version>
+    <velocity.version>1.7</velocity.version>
+    <xmlunit.version>2.10.0</xmlunit.version>
+
+    <!-- =====================================================
+         Pinned transitive dependency version properties (in alphabetical order)
+
+         These are not directly used in the code, but ensure
+         the independence of transitive dependencies from the order
+         of dependencies (requireUpperBoundDeps rule).
+         ===================================================== -->
+    <asm.version>9.6</asm.version>
+    <byte-buddy.version>1.15.10</byte-buddy.version>
+    <commons-pool2.version>2.12.0</commons-pool2.version>
+    <httpclient.version>4.5.14</httpclient.version>
+    <httpcore.version>4.4.16</httpcore.version>
+    <jna.version>5.15.0</jna.version>
+
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <!-- BEGIN: Modules that are not published (and hence missing in the BOM) -->
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-osgi-test</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-layout-template-json-test</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-jdbc</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-layout-jackson</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
+      </dependency>
+
+      <!-- END: Modules that are not published (and hence missing in the BOM) -->
+
+      <dependency>
+        <groupId>org.apache.groovy</groupId>
+        <artifactId>groovy-bom</artifactId>
+        <version>${groovy.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-bom</artifactId>
+        <version>${mockito.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${assertj.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.awaitility</groupId>
+        <artifactId>awaitility</artifactId>
+        <version>${awaitility.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache-extras.beanshell</groupId>
+        <artifactId>bsh</artifactId>
+        <version>${bsh.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-csv</artifactId>
+        <version>${commons-csv.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-dbcp2</artifactId>
+        <version>${commons-dbcp2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-pool2</artifactId>
+        <version>${commons-pool2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.lmax</groupId>
+        <artifactId>disruptor</artifactId>
+        <version>${disruptor.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.zapodot</groupId>
+        <artifactId>embedded-ldap-junit</artifactId>
+        <version>${embedded-ldap.version}</version>
+      </dependency>
+
+      <!-- Transitive dependency: setting upper bound of declared versions -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <!-- https://javadoc.io/doc/com.google.guava/guava-testlib/latest/com/google/common/testing/TestLogHandler.html used in log4j-to-jul tests -->
+        <artifactId>guava-testlib</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${h2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest</artifactId>
+        <version>${hamcrest.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>${hamcrest.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>${hamcrest.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hdrhistogram</groupId>
+        <artifactId>HdrHistogram</artifactId>
+        <version>${HdrHistogram.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>${hsqldb.version}</version>
+      </dependency>
+
+      <!-- Used for garbage-free tests: -->
+      <dependency>
+        <groupId>com.google.code.java-allocation-instrumenter</groupId>
+        <artifactId>java-allocation-instrumenter</artifactId>
+        <version>${java-allocation-instrumenter.version}</version>
+      </dependency>
+
+      <!-- used by `log4j-1.2-api`: -->
+      <dependency>
+        <groupId>javax.jms</groupId>
+        <artifactId>javax.jms-api</artifactId>
+        <version>${javax-jms.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jctools</groupId>
+        <artifactId>jctools-core</artifactId>
+        <version>${jctools.version}</version>
+      </dependency>
+
+      <!-- Zeroconf advertiser tests: -->
+      <dependency>
+        <groupId>org.jmdns</groupId>
+        <artifactId>jmdns</artifactId>
+        <version>${jmdns.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>${jmh.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-generator-annprocess</artifactId>
+        <version>${jmh.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.java.dev.jna</groupId>
+        <artifactId>jna</artifactId>
+        <version>${jna.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>net.javacrumbs.json-unit</groupId>
+        <artifactId>json-unit</artifactId>
+        <version>${json-unit.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit-pioneer</groupId>
+        <artifactId>junit-pioneer</artifactId>
+        <version>${junit-pioneer.version}</version>
+      </dependency>
+
+      <!-- Tested as a legacy 2.x plugin: -->
+      <dependency>
+        <groupId>com.github.ivandzf</groupId>
+        <artifactId>log4j2-custom-layout</artifactId>
+        <version>${log4j2-custom-layout.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- Tested as a legacy 2.x plugin: -->
+      <dependency>
+        <groupId>com.vlkan.log4j2</groupId>
+        <artifactId>log4j2-logstash-layout</artifactId>
+        <version>${log4j2-logstash-layout.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-core</artifactId>
+        <version>${maven.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-model</artifactId>
+        <version>${maven.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openjdk.nashorn</groupId>
+        <artifactId>nashorn-core</artifactId>
+        <version>${nashorn.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.opentest4j</groupId>
+        <artifactId>opentest4j</artifactId>
+        <version>${opentest4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.framework</artifactId>
+        <version>${felix.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.platform</groupId>
+        <artifactId>org.eclipse.osgi</artifactId>
+        <version>${org.eclipse.osgi.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.framework</artifactId>
+        <version>${osgi.framework.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.resource</artifactId>
+        <version>${osgi.resource.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>oro</groupId>
+        <artifactId>oro</artifactId>
+        <version>${oro.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam</artifactId>
+        <version>${pax-exam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-container-native</artifactId>
+        <version>${pax-exam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-junit4</artifactId>
+        <version>${pax-exam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-link-assembly</artifactId>
+        <version>${pax-exam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-spi</artifactId>
+        <version>${pax-exam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-utils</artifactId>
+        <version>${plexus-utils.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>uk.org.webcompere</groupId>
+        <artifactId>system-stubs-core</artifactId>
+        <version>${system-stubs.version}</version>
+      </dependency>
+
+      <!-- Environment and system properties support for JUnit Jupiter: -->
+      <dependency>
+        <groupId>uk.org.webcompere</groupId>
+        <artifactId>system-stubs-jupiter</artifactId>
+        <version>${system-stubs.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity</artifactId>
+        <version>${velocity.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-core</artifactId>
+        <version>${xmlunit.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-matchers</artifactId>
+        <version>${xmlunit.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <!-- Common annotations used in all the modules -->
+  <dependencies>
+
+    <dependency>
+      <groupId>biz.aQute.bnd</groupId>
+      <artifactId>biz.aQute.bnd.annotation</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <version>${error-prone.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+      <version>${jspecify.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.annotation</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <groupId>io.fabric8</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>${docker-maven-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.ops4j.pax.exam</groupId>
+          <artifactId>exam-maven-plugin</artifactId>
+          <version>${exam-maven-plugin.version}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <!--
+        ~ A previous `generate-module-descriptors` execution leaves:
+        ~  * `target/classes/module-info.class` files, which interferes with `maven-compiler-plugin`,
+        ~  * `target/classes/META-INF/versions` folder, which switch `bnd-maven-plugin` into MRJ mode.
+        ~
+        ~ TODO: test BND multi-release mode in 2.23.0.
+        -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>delete-module-descriptors</id>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <phase>process-sources</phase>
+            <configuration>
+              <excludeDefaultDirectories>true</excludeDefaultDirectories>
+              <filesets>
+                <fileset>
+                  <directory>${project.build.outputDirectory}</directory>
+                  <includes>
+                    <include>module-info.class</include>
+                    <include>META-INF/versions/**</include>
+                  </includes>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--
+        ~ Some external logging bridges can interfere with our tests, giving false negatives.
+        -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>ban-logging-dependencies</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <bannedDependencies>
+                  <excludes>
+                    <!-- JCL replacements -->
+                    <exclude>org.slf4j:jcl-over-slf4j</exclude>
+                    <exclude>org.springframework:spring-jcl</exclude>
+                    <!-- Log4j 1.x and replacements -->
+                    <exclude>log4j:log4j</exclude>
+                    <exclude>org.slf4j:log4j-over-slf4j</exclude>
+                    <exclude>ch.qos.reload4j:reload4j</exclude>
+                    <!-- Bridges to Log4j 1.x -->
+                    <exclude>org.slf4j:slf4j-log4j12</exclude>
+                    <exclude>org.slf4j:slf4j-reload4j</exclude>
+                    <!-- PAX Logging just to be safe -->
+                    <exclude>org.ops4j.pax.logging:*</exclude>
+                    <!-- Logback -->
+                    <exclude>ch.qos.logback:*</exclude>
+                  </excludes>
+                </bannedDependencies>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>ban-static-transitive</id>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <continueExecuting>false</continueExecuting>
+              <scripts>
+                <script><![CDATA[
+                  import java.io.StringWriter
+                  import java.util.spi.ToolProvider
+
+                  if ("jar" != project.packaging) {
+                      log.info("Skipping module descriptor check, since the project type is not `jar`.")
+                      return
+                  }
+                  String jarFile = project.build.directory + "/" + project.build.finalName + ".jar";
+                  if (!new File(jarFile).exists()) {
+                      log.info("Skipping module descriptor check, since `" + jarFile + "` is missing.")
+                      return
+                  }
+                  StringWriter out = new StringWriter()
+                  StringWriter err = new StringWriter()
+                  ToolProvider jar = ToolProvider.findFirst("jar").orElseThrow()
+                  int result = jar.run(new PrintWriter(out), new PrintWriter(err), "-d", "-f", jarFile)
+                  if (result != 0) {
+                      throw new RuntimeException("Failed to decompile the module descriptor in `" + jarFile + "`:\n" + err)
+                  }
+                  log.debug("Module descriptor: " + out)
+                  for (String line : out.toString().split("\r?\n", -1)) {
+                      if (line.contains("static") && line.contains("transitive")) {
+                          throw new RuntimeException("The `static` and `transitive` modifiers should not be use together: " + line)
+                      }
+                  }
+                  log.info("Successfully verified module descriptor in `" + jarFile + "`.")
+              ]]></script>
+              </scripts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <profiles>
+
+    <!-- `plugin-processing` profile containing configuration specific to `@Plugin`-annotated members -->
+    <profile>
+
+      <id>plugin-processing</id>
+
+      <!-- Profile gets activated using a file instead of, say, a property defined by the child `pom.xml`.
+           Since a Maven property lookup requires model interpolation and that happens after the profile activation phase.
+           See: https://maven.apache.org/ref/3.9.6/maven-model-builder -->
+      <activation>
+        <file>
+          <exists>.log4j-plugin-processing-activator</exists>
+        </file>
+      </activation>
+
+      <properties>
+        <log4j.docgen.pluginDescriptorsDir.skipped>${maven.multiModuleProjectDirectory}/target/plugin-descriptors/skipped</log4j.docgen.pluginDescriptorsDir.skipped>
+        <log4j.docgen.pluginDescriptorsDir>${log4j.docgen.pluginDescriptorsDir.phase2}</log4j.docgen.pluginDescriptorsDir>
+      </properties>
+
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+
+              <!-- Generate a random target package for `Log4jPlugins.java` -->
+              <execution>
+                <id>define-log4jPluginPackageForTests</id>
+                <goals>
+                  <goal>bsh-property</goal>
+                </goals>
+                <phase>process-test-resources</phase>
+                <configuration>
+                  <properties>
+                    <property>log4jPluginPackageForTests</property>
+                  </properties>
+                  <source><![CDATA[
+                    import java.util.Locale;
+                    import java.util.Random;
+
+                    String groupId = project.getGroupId();
+                    String sanitizedArtifactId = project
+                            .getArtifactId()
+                            .toLowerCase(Locale.US)
+                            .replaceFirst("^log4j-", "")
+                            .replaceAll("[^a-z]", "_");
+                    int salt = new Random(sanitizedArtifactId.hashCode()).nextInt(1000);
+                    String log4jPluginPackageForTests = String.format("%s.%s.internal%d", new Object[] {
+                        groupId, sanitizedArtifactId, salt
+                    });
+                  ]]></source>
+                </configuration>
+              </execution>
+
+              <!-- This is a workaround to effectively disable Log4j Docgen `DescriptorGenerator` plugin processor.
+                   Once Log4j Docgen `>0.9.0` is released (containing the new `log4j.docgen.skip` argument to `DescriptorGenerator`):
+                   1. Remove this `build-helper:bsh-property` execution
+                   2. Remove the `log4j.docgen.pluginDescriptorsDir.skipped` property
+                   3. In the `PluginProcessor` execution configuration
+                      - Add `-Alog4j.docgen.skip=${log4j.docgen.skip}` argument
+                      - Set `-Alog4j.docgen.descriptorFilePath=${log4j.docgen.pluginDescriptorsDir}/${project.artifactId}-plugins.xml` argument -->
+              <execution>
+                <id>define-log4jDocgenDescriptorFilepath</id>
+                <goals>
+                  <goal>bsh-property</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <properties>
+                    <property>log4jDocgenDescriptorFilepath</property>
+                  </properties>
+                  <source><![CDATA[
+                    Properties properties = project.getProperties();
+                    String pluginDescriptorsDir = "true".equals(properties.getProperty("log4j.docgen.skip"))
+                            ? properties.getProperty("log4j.docgen.pluginDescriptorsDir.skipped")
+                            : properties.getProperty("log4j.docgen.pluginDescriptorsDir");
+                    String log4jDocgenDescriptorFilepath = String.format("%s/%s-plugins.xml", new Object[] {
+                        pluginDescriptorsDir, project.getArtifactId()
+                    });
+                  ]]></source>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+
+            <configuration>
+              <annotationProcessorPaths combine.children="append">
+                <!-- Include `org.apache.logging.log4j.docgen.processor.DescriptorGenerator` that generates `log4j-plugins.xml`.
+                     `DescriptorGenerator` must precede `PluginProcessor`, since the latter *claims* the `@Plugin`.
+                     Once claimed, `javac` doesn't pass those sources to other processors. -->
+                <path>
+                  <groupId>org.apache.logging.log4j</groupId>
+                  <artifactId>log4j-docgen</artifactId>
+                  <version>${log4j-docgen.version}</version>
+                </path>
+                <!-- `org.apache.logging.log4j.plugin.processor.PluginProcessor` invocation: -->
+                <path>
+                  <groupId>org.apache.logging.log4j</groupId>
+                  <artifactId>log4j-plugin-processor</artifactId>
+                  <version>${project.version}</version>
+                </path>
+              </annotationProcessorPaths>
+              <compilerArgs combine.children="append">
+                <!-- Provide `org.apache.logging.log4j.docgen.processor.DescriptorGenerator` arguments: -->
+                <arg>-Alog4j.docgen.descriptorFilePath=${log4jDocgenDescriptorFilepath}</arg>
+                <arg>-Alog4j.docgen.groupId=${project.groupId}</arg>
+                <arg>-Alog4j.docgen.artifactId=${project.artifactId}</arg>
+                <arg>-Alog4j.docgen.version=${project.version}</arg>
+                <arg>-Alog4j.docgen.description=${project.description}</arg>
+                <arg>-Alog4j.docgen.typeFilter.excludePattern=${log4j.docgen.typeFilter.excludePattern}</arg>
+              </compilerArgs>
+            </configuration>
+
+            <!-- `PluginProcessor` generates a `Log4jPlugins.java` and registers it with `ServiceLoader`.
+                 The package of this class is normally auto-computed as the common prefix of all plugin classes.
+                 Some modules contain plugins in both `src/main` and `src/test`.
+                 Without an additional annotation processor parameter, one class shadows the other one.
+                 Hence, we point the one in `src/test` to elsewhere. -->
+            <executions>
+              <execution>
+                <id>default-testCompile</id>
+                <configuration>
+                  <compilerArgs combine.children="append">
+                    <arg>-ApluginPackage=${log4jPluginPackageForTests}</arg>
+                  </compilerArgs>
+                </configuration>
+              </execution>
+            </executions>
+
+          </plugin>
+
+        </plugins>
+      </build>
+
+    </profile>
+
+  </profiles>
+
+</project>

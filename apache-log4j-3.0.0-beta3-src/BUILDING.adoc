@@ -1,0 +1,146 @@
+////
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+////
+
+[#requirements]
+== Requirements
+
+* JDK 17+
+* A modern Linux, OSX, or Windows host
+
+[#building]
+== Building the sources
+
+You can build and verify the sources as follows:
+
+[source,bash]
+----
+./mvnw verify
+----
+
+`verify` goal runs validation and test steps next to building (i.e., compiling) the sources.
+To speed up the build, you can skip verification:
+
+[source,bash]
+----
+./mvnw -DskipTests package
+----
+
+If you want to install generated artifacts to your local Maven repository, replace above `verify` and/or `package` goals with `install`.
+
+[#dns]
+=== DNS lookups in tests
+
+Note that if your `/etc/hosts` file does not include an entry for your computer's hostname, then many unit tests may execute slow due to DNS lookups to translate your hostname to an IP address in `InetAddress.getLocalHost()`.
+To remedy this, you can execute the following:
+
+[source,bash]
+----
+printf '127.0.0.1 %s\n::1 %s\n' `hostname` `hostname` | sudo tee -a /etc/hosts
+----
+
+[#docker]
+=== Docker tests
+
+Certain tests use Docker to spawn necessary external services.
+Docker tests are configured using the `docker` Maven profile, which is activated by default for the CI environment.
+You can locally enable this profile by passing a `-P docker` argument to your `./mvnw` commands.
+
+[#website]
+== Building the website
+
+You can build the website as follows:
+
+[source,bash]
+----
+./mvnw compile    # <1>
+./mvnw site       # <2>
+----
+<1> Generate plugin descriptors that will be used to generate the plugin reference page.
+Descriptors are placed under `target/plugin-descriptors`.
+<2> Generate the website to `target/site`
+
+You can view the generated website with a browser by pointing it to `target/site` directory.
+
+[#development]
+== Development
+
+You can follow below steps for casual development needs:
+
+. Make sure you installed everything:
++
+[source,bash]
+----
+./mvnw install -DskipTests
+----
+
+. After making a change to, say, `log4j-core`, install your changes:
++
+[source,bash]
+----
+./mvnw install -pl :log4j-core -DskipTests
+----
+
+. Run all tests associated with `log4j-core`:
++
+[source,bash]
+----
+./mvnw test -pl :log4j-core-test
+----
+
+. Run a particular test:
++
+[source,bash]
+----
+./mvnw test -pl :log4j-core-test -Dtest=FooBarTest
+----
+
+. Make sure all build checks (Spotless, Spotbugs, BND, RAT, etc.) succeed:
++
+[source,bash]
+----
+./mvnw verify -DskipTests -pl :log4j-core,:log4j-core-test
+----
+
+[#development-ide-debug]
+=== Debugging `./mvnw test` with IDE
+
+You can connect your IDE to a `./mvnw test` run by
+
+. Run `./mvnw test -pl :log4j-core-test -Dtest=FooBarTest -Dmaven.surefire.debug`
+. Use _"Run > Attach to process"_ in IntelliJ IDEA
+
+[#development-ci]
+=== Activating CI profiles
+
+There are certain Maven profiles activated only for CI.
+As a consequence of this, you can observe certain CI failures that you can't reproduce locally.
+To work around this, you can activate CI profiles by running Maven commands as follows:
+
+[source,bash]
+----
+CI=true ./mvnw ...
+----
+
+[#development-faq-idea-plugin-not-found]
+=== Compilation in IntelliJ IDEA fails with `java: plug-in not found: ErrorProne`
+
+Try removing all _"Override compiler parameters per-module"_ entries in _"Settings > Build, Execution, Deployment > Compiler > Java Compiler"_.
+
+[#development-faq-idea-package-plugins]
+=== Compilation in IntelliJ IDEA fails with `java: package org.apache.logging.log4j.plugins.test.validation.plugins does not exist`
+
+We don't know how to fix this.

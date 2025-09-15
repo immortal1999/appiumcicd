@@ -1,0 +1,11 @@
+31:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+31:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:invalidPassword*****
+
+31:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+31:AndroidPixel_9:com.qa.pages.LoginPage:password is  invalidpassword
+31:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+31:AndroidPixel_9:com.qa.pages.LoginPage:error text is - Username and password do not match any user in this service.
+31:AndroidPixel_9:com.qa.tests.LoginTests:actual error txt - Username and password do not match any user in this service.
+expected error txt - Username and password do not match any user in this service.
+31:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method

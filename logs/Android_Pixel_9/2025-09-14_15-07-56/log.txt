@@ -1,0 +1,33 @@
+34:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+34:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:invalidPassword*****
+
+34:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+34:AndroidPixel_9:com.qa.pages.LoginPage:password is  invalidpassword
+34:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+34:AndroidPixel_9:com.qa.pages.LoginPage:error text is - Username and password do not match any user in this service.
+34:AndroidPixel_9:com.qa.tests.LoginTests:actual error txt - Username and password do not match any user in this service.
+expected error txt - Username and password do not match any user in this service.
+34:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method
+34:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+34:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:invalidUserNameTest*****
+
+34:AndroidPixel_9:com.qa.pages.LoginPage:login with invalidusername
+34:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+34:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+34:AndroidPixel_9:com.qa.pages.LoginPage:error text is - Username and password do not match any user in this service.
+34:AndroidPixel_9:com.qa.tests.LoginTests:actual error txt - Username and password do not match any user in this service.
+expected error txt - Username and password do not match any user in this service.
+34:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method
+34:AndroidPixel_9:com.qa.tests.LoginTests:loginTest before method
+34:AndroidPixel_9:com.qa.tests.LoginTests:
+***** starting test:successfulLogin*****
+
+34:AndroidPixel_9:com.qa.pages.LoginPage:login with standard_user
+34:AndroidPixel_9:com.qa.pages.LoginPage:password is  secret_sauce
+34:AndroidPixel_9:com.qa.pages.LoginPage:press login button
+34:AndroidPixel_9:com.qa.pages.ProductsPage:product page title is - PRODUCTS
+34:AndroidPixel_9:com.qa.tests.LoginTests:actual title - PRODUCTS
+expected title - PRODUCTS
+34:AndroidPixel_9:com.qa.tests.LoginTests:loginTest after method
